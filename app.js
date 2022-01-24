@@ -12,6 +12,8 @@ const MongoStore = require('connect-mongo')(session);
 // Need to require the entire Passport config module so app.js knows about it
 require('./config/passport');
 
+
+
 /**
  * -------------- GENERAL SETUP ----------------
  */
@@ -21,6 +23,9 @@ require('dotenv').config();
 
 // Create the Express application
 var app = express();
+// It is safer to initialize the passport every time middleware is used
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));

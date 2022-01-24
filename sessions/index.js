@@ -24,7 +24,7 @@ const sessionStore = new MongoStore({
 });
 
 app.use(session({
-    secret: 'some secret',
+    secret: process.env.SHUPER_CHUPER_SHECRET,
     resave: false,
     saveUninitialized: true,
     store: sessionStore,
@@ -34,6 +34,13 @@ app.use(session({
 }));
 
 app.get('/', (req, res, next) => {
+    if (req.session.viewCount) {
+        req.session.viewCount = Object.freeze(req.session.viewCount + 1);
+    } else {
+        req.session.viewCount = 1;
+    }
+
+    console.log(req.session);
     res.send('<h1>Hello world (Sessions)</h1>');
 });
 
