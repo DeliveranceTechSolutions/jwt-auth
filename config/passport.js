@@ -2,12 +2,13 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const connection = require('./database');
 const User = connection.models.User;
+const validatePassword = require('../lib/passwordUtils').validatePassword;
 
 // passport local strategy has set param names that can be modified here
 const customFields = {
     usernameFields: 'uname',
     passwordField: 'pw'
-}
+};
 
 const verifyCallback = (username, password, done) => {
     
@@ -15,8 +16,8 @@ const verifyCallback = (username, password, done) => {
         .then((user) => {
             if (!user) { return done(null, false) }
 
-            const isValid = validPassword(password, user.hash, user.salt);
-
+            const isValid = validatePassword(password, user.hash, user.salt);
+            console.log(`isValid: ${isValid}`)
             if (isValid) {
                 return done(null, user);
             } else {
@@ -25,7 +26,7 @@ const verifyCallback = (username, password, done) => {
 
         })
         .catch((err) => {
-            cb(err)
+            done(err)
         });
     
 
