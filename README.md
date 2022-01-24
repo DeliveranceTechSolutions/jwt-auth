@@ -2,11 +2,11 @@
 
 This repo has three branches:
 
-* master
+* main
 * final
 * final-all-in-one
 
-The `master` branch has a starter template for creating what is in the `final` branch.  The `final-all-in-one` is a single `app-all.js` file that functions completely alone, while the `final` branch is a refactored version of that.
+The `main` branch has a starter template for creating what is in the `final` branch.  The `final-all-in-one` is a single `app-all.js` file that functions completely alone, while the `final` branch is a refactored version of that.
 
 ## How to run the app
 
